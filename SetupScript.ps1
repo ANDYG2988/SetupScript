@@ -1,4 +1,4 @@
-﻿#Setup Script V0.8
+#Setup Script V0.8
 Set-ExecutionPolicy RemoteSigned
 
 #powershell.exe -ep RemoteSigned "C:\Users\$env:UserName\Desktop\Code.ps1"
