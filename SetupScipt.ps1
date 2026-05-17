@@ -803,9 +803,20 @@ function Start-NewComputerSetup {
     Write-Host "   STARTING NEW COMPUTER SETUP" -ForegroundColor Cyan
     Write-Host "========================================`n" -ForegroundColor Cyan
 
-    $dotNetChoice = Read-Host "Do you want to enable .NET Framework 3.5? (Y/N)"
-    while ($dotNetChoice -notmatch '^[YNyn]$') {
+    $setupChoice = Read-Host "Do you want to select different options before running this script (Y/N)"
+    while ($setupChoice -notmatch '^[YNyn]$') {
         Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red
+    }
+
+    if ($setupChoice -eq "Y" -or $setupChoice -eq "y") {
+        $dotNetChoice = Read-Host "Do you want to enable .NET Framework 3.5? (Y/N)"
+        while ($dotNetChoice -notmatch '^[YNyn]$') {Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red}
+        
+        $passwordPolicyChoice = Read-Host "Do you want to set Recommended Password Policy? (Y/N)"
+        while ($dotNetCpasswordPolicyChoicehoice -notmatch '^[YNyn]$') {Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red}
+
+    } else {
+        Write-Host "All functions will run with default options..."
     }
 
         Write-Host "[1/18] Registering Power Settings..." -ForegroundColor Yellow
@@ -851,8 +862,12 @@ function Start-NewComputerSetup {
         Write-Host "`n[13/18] Disabling Autoplay..." -ForegroundColor Yellow
         Disable-Autoplay
 
-        Write-Host "`n[14/18] Setting Recommended Password Policy..." -ForegroundColor Yellow
-        Set-RecommendedPasswordPolicy
+        if ($passwordPolicyChoice -eq "Y" -or $passwordPolicyChoice -eq "y") {
+            Write-Host "`n[14/18] Setting Recommended Password Policy..." -ForegroundColor Yellow
+            Set-RecommendedPasswordPolicy
+        } else {
+            Write-Host "Skipping Recommended Password Policy - (Staying on Default)" -ForegroundColor Yellow
+        }
 
         Write-Host "`n[15/18] Enabling Windows Latest Updates..." -ForegroundColor Yellow
         Enable-WindowsLatestUpdates
@@ -1016,8 +1031,8 @@ $menuItems = @(
     [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 22; Label = "Disable Task View";              Action = { Disable-TaskView } }
     [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 23; Label = "Enable Autoplay";                Action = { Enable-Autoplay } }
     [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 24; Label = "Disable Autoplay";               Action = { Disable-Autoplay } }
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 25; Label = "Disable Edge Startup";           Action = { Disable-EdgeStartup } }   # assumes function exists
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 26; Label = "Disable Chrome Startup";         Action = { Disable-ChromeStartup } } # assumes function exists
+    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 25; Label = "Disable Edge Startup";           Action = { Disable-EdgeStartup } }
+    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 26; Label = "Disable Chrome Startup";         Action = { Disable-ChromeStartup } }
     [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 27; Label = "Stop Explorer";                  Action = { Stop-Explorer } }
 
     # --- Performance / Power ---
