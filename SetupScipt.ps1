@@ -73,13 +73,14 @@ function Install-Office {
     # Download setup.exe if not exists
     if (-not (Test-Path $setupPath)) {
         Write-Output "Downloading Setup.exe"
-        (New-Object System.Net.WebClient).DownloadFile("https://github.com/agukbiz2988/SetupScript/raw/main/setup.exe", $setupPath)
+        (New-Object System.Net.WebClient).DownloadFile("https://github.com/ANDYG2988/SetupScript/raw/refs/heads/main/setup.exe", $setupPath)
+        
     } else {
         Write-Output "Setup.exe Already Exists"
     }
     
     # Download configuration file if not exists
-    $configUrl = "https://raw.githubusercontent.com/agukbiz2988/SetupScript/main/$configFileName"
+    $configUrl = "https://raw.githubusercontent.com/ANDYG2988/SetupScript/refs/heads/main/$configFileName"
     if (-not (Test-Path $configPath)) {
         Write-Output "Downloading Office $Architecture Bit Configuration"        
         (New-Object System.Net.WebClient).DownloadFile($configUrl, $configPath)
@@ -112,7 +113,7 @@ function Remove-AllOffice {
     # Download Office 365 Uninstaller
     if (-not (Test-Path $setupPath)) {
         Write-Output "Downloading Office Products Uninstaller"
-        (New-Object System.Net.WebClient).DownloadFile("https://github.com/agukbiz2988/SetupScript/raw/main/setup.exe", $setupPath)
+        (New-Object System.Net.WebClient).DownloadFile("https://github.com/ANDYG2988/SetupScript/raw/refs/heads/main/setup.exe", $setupPath)
     }
     else {
         Write-Output "Setup.exe Already Exists"
@@ -120,7 +121,7 @@ function Remove-AllOffice {
 
     if (-not (Test-Path $configPath)) {
         Write-Output "Downloading Office Uninstall Configuration"        
-        (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/agukbiz2988/SetupScript/main/configurationUninstall.xml", $configPath)
+        (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/ANDYG2988/SetupScript/refs/heads/main/configurationUninstall.xml", $configPath)
     }
     else {
         Write-Output "configurationUninstall.xml Already Exists"
