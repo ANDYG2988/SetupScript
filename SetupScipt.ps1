@@ -994,41 +994,41 @@ $menuItems = @(
     [pscustomobject]@{ Group = "Core Setup"; Id = 6;  Label = "Install Programs";                   Action = { Install-Programs } }
     [pscustomobject]@{ Group = "Core Setup"; Id = 7;  Label = "Enable .NET Framework 3.5";          Action = { Enable-DotNet3Point5 } }
     [pscustomobject]@{ Group = "Core Setup"; Id = 8;  Label = "Start Windows Update (Auto)";        Action = { Start-WindowsUpdate } }
-    [pscustomobject]@{ Group = "Core Setup"; Id = 20; Label = "Start Windows Update (Manual)";      Action = { Start-WindowsUpdateManual } }
-    [pscustomobject]@{ Group = "Core Setup"; Id = 9;  Label = "Join Domain";                        Action = { Join-Domain } }
+    [pscustomobject]@{ Group = "Core Setup"; Id = 9; Label = "Start Windows Update (Manual)";       Action = { Start-WindowsUpdateManual } }
+    [pscustomobject]@{ Group = "Core Setup"; Id = 10;  Label = "Join Domain";                       Action = { Join-Domain } }
 
     # --- Office / Apps ---
-    [pscustomobject]@{ Group = "Office / Apps"; Id = 10; Label = "Install Office 32-bit";           Action = { Install-Office32 } }
-    [pscustomobject]@{ Group = "Office / Apps"; Id = 11; Label = "Install Office 64-bit";           Action = { Install-Office64 } }
-    [pscustomobject]@{ Group = "Office / Apps"; Id = 12; Label = "Uninstall All Office Products";   Action = { Remove-AllOffice } }
-    [pscustomobject]@{ Group = "Office / Apps"; Id = 29; Label = "Install Splashtop SOS";           Action = { Install-SplashtopSOS } }
-    [pscustomobject]@{ Group = "Office / Apps"; Id = 18; Label = "Remove HP Wolf Security";         Action = { Remove-HPWolfSecurity } }
+    [pscustomobject]@{ Group = "Office / Apps"; Id = 11; Label = "Install Office 32-bit";           Action = { Install-Office32 } }
+    [pscustomobject]@{ Group = "Office / Apps"; Id = 12; Label = "Install Office 64-bit";           Action = { Install-Office64 } }
+    [pscustomobject]@{ Group = "Office / Apps"; Id = 13; Label = "Uninstall All Office Products";   Action = { Remove-AllOffice } }
+    [pscustomobject]@{ Group = "Office / Apps"; Id = 14; Label = "Install Splashtop SOS";           Action = { Install-SplashtopSOS } }
+    [pscustomobject]@{ Group = "Office / Apps"; Id = 15; Label = "Remove HP Wolf Security";         Action = { Remove-HPWolfSecurity } }
 
     # --- Winget / App Installer ---
-    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 21; Label = "Install Winget Source";  Action = { Install-WingetSource } }
-    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 22; Label = "Install Winget from GitHub"; Action = { Install-WingetGitHub } }
-    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 23; Label = "Upgrade Winget";         Action = { Install-WingetUpgrade } }
-    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 24; Label = "Install Winget Manual";  Action = { Install-WingetManual } }
-    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 25; Label = "Remove Corrupted App Installer"; Action = { Remove-CorruptedAppInstaller } }
+    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 16; Label = "Install Winget Source";  Action = { Install-WingetSource } }
+    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 17; Label = "Install Winget from GitHub"; Action = { Install-WingetGitHub } }
+    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 18; Label = "Upgrade Winget";         Action = { Install-WingetUpgrade } }
+    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 19; Label = "Install Winget Manual";  Action = { Install-WingetManual } }
+    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 20; Label = "Remove Corrupted App Installer"; Action = { Remove-CorruptedAppInstaller } }
 
     # --- UI / UX Tweaks ---
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 26; Label = "Disable Widgets";                 Action = { Disable-Widgets } }
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 27; Label = "Disable Task View";              Action = { Disable-TaskView } }
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 14; Label = "Enable Autoplay";                Action = { Enable-Autoplay } }
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 15; Label = "Disable Autoplay";               Action = { Disable-Autoplay } }
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 34; Label = "Disable Edge Startup";           Action = { Disable-EdgeStartup } }   # assumes function exists
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 35; Label = "Disable Chrome Startup";         Action = { Disable-ChromeStartup } } # assumes function exists
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 32; Label = "Stop Explorer";                  Action = { Stop-Explorer } }
+    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 21; Label = "Disable Widgets";                 Action = { Disable-Widgets } }
+    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 22; Label = "Disable Task View";              Action = { Disable-TaskView } }
+    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 23; Label = "Enable Autoplay";                Action = { Enable-Autoplay } }
+    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 24; Label = "Disable Autoplay";               Action = { Disable-Autoplay } }
+    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 25; Label = "Disable Edge Startup";           Action = { Disable-EdgeStartup } }   # assumes function exists
+    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 26; Label = "Disable Chrome Startup";         Action = { Disable-ChromeStartup } } # assumes function exists
+    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 27; Label = "Stop Explorer";                  Action = { Stop-Explorer } }
 
     # --- Performance / Power ---
-    [pscustomobject]@{ Group = "Performance / Power"; Id = 13; Label = "Register Power Settings";   Action = { Register-PowerSettings } }
-    [pscustomobject]@{ Group = "Performance / Power"; Id = 28; Label = "Set Performance Settings";  Action = { Set-PerformanceSettings } }
-    [pscustomobject]@{ Group = "Performance / Power"; Id = 33; Label = "Restart Computer";          Action = { Restart-Computer } }
+    [pscustomobject]@{ Group = "Performance / Power"; Id = 28; Label = "Register Power Settings";   Action = { Register-PowerSettings } }
+    [pscustomobject]@{ Group = "Performance / Power"; Id = 29; Label = "Set Performance Settings";  Action = { Set-PerformanceSettings } }
+    [pscustomobject]@{ Group = "Performance / Power"; Id = 30; Label = "Restart Computer";          Action = { Restart-Computer } }
 
     # --- Security / Passwords ---
-    [pscustomobject]@{ Group = "Security / Passwords"; Id = 19; Label = "Generate New Password";      Action = { New-Password } }
-    [pscustomobject]@{ Group = "Security / Passwords"; Id = 30; Label = "Set Recommended Password Policy"; Action = { Set-RecommendedPasswordPolicy } }
-    [pscustomobject]@{ Group = "Security / Passwords"; Id = 31; Label = "Set Default Password Policy";    Action = { Set-DefaultPasswordPolicy } }
+    [pscustomobject]@{ Group = "Security / Passwords"; Id = 31; Label = "Generate New Password";      Action = { New-Password } }
+    [pscustomobject]@{ Group = "Security / Passwords"; Id = 32; Label = "Set Recommended Password Policy"; Action = { Set-RecommendedPasswordPolicy } }
+    [pscustomobject]@{ Group = "Security / Passwords"; Id = 33; Label = "Set Default Password Policy";    Action = { Set-DefaultPasswordPolicy } }
 
     # --- Automation ---
     [pscustomobject]@{ Group = "Automation"; Id = "*"; Label = "Start New Computer Setup (Automated)"; Action = { Start-NewComputerSetup } }
