@@ -813,7 +813,7 @@ function Start-NewComputerSetup {
         while ($dotNetChoice -notmatch '^[YNyn]$') {Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red}
         
         $passwordPolicyChoice = Read-Host "Do you want to set Recommended Password Policy? (Y/N)"
-        while ($dotNetCpasswordPolicyChoicehoice -notmatch '^[YNyn]$') {Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red}
+        while ($passwordPolicyChoice -notmatch '^[YNyn]$') {Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red}
 
     } else {
         Write-Host "All functions will run with default options..."
@@ -910,196 +910,101 @@ function Restart-LocalComputer {
 # ---------------- EXECUTION ---------------- ##
 
 
-# $menuLoop = $true
-
-# while ($menuLoop) {
-#     Write-Host "`n`n========================================" -ForegroundColor Cyan
-#     Write-Host "         SETUP SCRIPT MAIN MENU         " -ForegroundColor Cyan
-#     Write-Host "========================================`n" -ForegroundColor Cyan
-
-#     Write-Host "[1]  Update All Packages"
-#     Write-Host "[2]  Rename PC"
-#     Write-Host "[3]  Set TimeZone to UK"
-#     Write-Host "[4]  Enable Remote Desktop"
-#     Write-Host "[5]  Remove Bloatware"
-#     Write-Host "[6]  Install Programs"
-#     Write-Host "[7]  Enable .NET Framework 3.5"
-#     Write-Host "[8]  Start Windows Update"
-#     Write-Host "[9]  Join Domain"
-#     Write-Host "[10] Install Office 32-bit"
-#     Write-Host "[11] Install Office 64-bit"
-#     Write-Host "[12] Uninstall All Office Products"
-#     Write-Host "[13] Register Power Settings"
-#     Write-Host "[14] Enable Autoplay"
-#     Write-Host "[15] Disable Autoplay"
-#     Write-Host "[16] Enable Windows Latest Updates"
-#     Write-Host "[17] Disable Windows Latest Updates"
-#     Write-Host "[18] Remove HP Wolf Security"
-#     Write-Host "[19] Generate New Password"
-#     Write-Host "[20] Start Windows Update Manual"
-#     Write-Host "[21] Install Winget Source"
-#     Write-Host "[22] Install Winget from GitHub"
-#     Write-Host "[23] Upgrade Winget"
-#     Write-Host "[24] Install Winget Manual"
-#     Write-Host "[25] Remove Corrupted App Installer"
-#     Write-Host "[26] Disable Widgets"
-#     Write-Host "[27] Disable Task View"
-#     Write-Host "[28] Set Performance Settings"
-#     Write-Host "[29] Install Splashtop SOS"
-#     Write-Host "[30] Set Recommended Password Policy"
-#     Write-Host "[31] Set Default Password Policy"
-#     Write-Host "[32] Stop Explorer"
-#     Write-Host "[33] Restart Computer`n"
-#     Write-Host "[34] Disable Edge Startup"
-#     Write-Host "[35] Disable Chrome Startup`n"
-#     Write-Host "[*] Start New Computer Setup (Automated)" -ForegroundColor Green
-#     Write-Host "[0]  Exit`n" -ForegroundColor Yellow    
-
-#     $choice = Read-Host "Enter your selection"
-
-#     switch ($choice) {
-#         "1"  { Update-AllPackages }
-#         "2"  { Rename-PC }
-#         "3"  { Set-TimeZoneUK }
-#         "4"  { Enable-RemoteDesktop }
-#         "5"  { Remove-Bloatware }
-#         "6"  { Install-Programs }
-#         "7"  { Enable-DotNet3Point5 }
-#         "8"  { Start-WindowsUpdate }
-#         "9"  { Join-Domain }
-#         "10" { Install-Office32 }
-#         "11" { Install-Office64 }
-#         "12" { Remove-AllOffice }
-#         "13" { Register-PowerSettings }
-#         "14" { Enable-Autoplay }
-#         "15" { Disable-Autoplay }
-#         "16" { Enable-WindowsLatestUpdates }
-#         "17" { Disable-WindowsLatestUpdates }
-#         "18" { Remove-HPWolfSecurity }
-#         "19" { New-Password }
-#         "20" { Start-WindowsUpdateManual }
-#         "21" { Install-WingetSource }
-#         "22" { Install-WingetGitHub }
-#         "23" { Install-WingetUpgrade }
-#         "24" { Install-WingetManual }
-#         "25" { Remove-CorruptedAppInstaller }
-#         "26" { Disable-Widgets }
-#         "27" { Disable-TaskView }
-#         "28" { Set-PerformanceSettings }
-#         "29" { Install-SplashtopSOS }
-#         "30" { Set-RecommendedPasswordPolicy }
-#         "31" { Set-DefaultPasswordPolicy }
-#         "32" { Stop-Explorer }
-#         "33" { Restart-Computer }
-#         "*"  { Start-NewComputerSetup }
-#         "0"  { $menuLoop = $false; Write-Host "`nExiting script." -ForegroundColor Yellow }
-#         default { Write-Host "Invalid selection. Please try again." -ForegroundColor Red }
-#     }
-# }
 $menuLoop = $true
 
-# Define menu items in one place
-$menuItems = @(
-    # --- Core Setup ---
-    [pscustomobject]@{ Group = "Core Setup"; Id = 1;  Label = "Update All Packages";                Action = { Update-AllPackages } }
-    [pscustomobject]@{ Group = "Core Setup"; Id = 2;  Label = "Rename PC";                          Action = { Rename-PC } }
-    [pscustomobject]@{ Group = "Core Setup"; Id = 3;  Label = "Set TimeZone to UK";                 Action = { Set-TimeZoneUK } }
-    [pscustomobject]@{ Group = "Core Setup"; Id = 4;  Label = "Enable Remote Desktop";              Action = { Enable-RemoteDesktop } }
-    [pscustomobject]@{ Group = "Core Setup"; Id = 5;  Label = "Remove Bloatware";                   Action = { Remove-Bloatware } }
-    [pscustomobject]@{ Group = "Core Setup"; Id = 6;  Label = "Install Programs";                   Action = { Install-Programs } }
-    [pscustomobject]@{ Group = "Core Setup"; Id = 7;  Label = "Enable .NET Framework 3.5";          Action = { Enable-DotNet3Point5 } }
-    [pscustomobject]@{ Group = "Core Setup"; Id = 8;  Label = "Start Windows Update (Auto)";        Action = { Start-WindowsUpdate } }
-    [pscustomobject]@{ Group = "Core Setup"; Id = 9; Label = "Start Windows Update (Manual)";       Action = { Start-WindowsUpdateManual } }
-    [pscustomobject]@{ Group = "Core Setup"; Id = 10;  Label = "Join Domain";                       Action = { Join-Domain } }
-
-    # --- Office / Apps ---
-    [pscustomobject]@{ Group = "Office / Apps"; Id = 11; Label = "Install Office 32-bit";           Action = { Install-Office32 } }
-    [pscustomobject]@{ Group = "Office / Apps"; Id = 12; Label = "Install Office 64-bit";           Action = { Install-Office64 } }
-    [pscustomobject]@{ Group = "Office / Apps"; Id = 13; Label = "Uninstall All Office Products";   Action = { Remove-AllOffice } }
-    [pscustomobject]@{ Group = "Office / Apps"; Id = 14; Label = "Install Splashtop SOS";           Action = { Install-SplashtopSOS } }
-    [pscustomobject]@{ Group = "Office / Apps"; Id = 15; Label = "Remove HP Wolf Security";         Action = { Remove-HPWolfSecurity } }
-
-    # --- Winget / App Installer ---
-    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 16; Label = "Install Winget Source";  Action = { Install-WingetSource } }
-    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 17; Label = "Install Winget from GitHub"; Action = { Install-WingetGitHub } }
-    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 18; Label = "Upgrade Winget";         Action = { Install-WingetUpgrade } }
-    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 19; Label = "Install Winget Manual";  Action = { Install-WingetManual } }
-    [pscustomobject]@{ Group = "Winget / App Installer"; Id = 20; Label = "Remove Corrupted App Installer"; Action = { Remove-CorruptedAppInstaller } }
-
-    # --- UI / UX Tweaks ---
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 21; Label = "Disable Widgets";                 Action = { Disable-Widgets } }
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 22; Label = "Disable Task View";              Action = { Disable-TaskView } }
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 23; Label = "Enable Autoplay";                Action = { Enable-Autoplay } }
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 24; Label = "Disable Autoplay";               Action = { Disable-Autoplay } }
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 25; Label = "Disable Edge Startup";           Action = { Disable-EdgeStartup } }
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 26; Label = "Disable Chrome Startup";         Action = { Disable-ChromeStartup } }
-    [pscustomobject]@{ Group = "UI / UX Tweaks"; Id = 27; Label = "Stop Explorer";                  Action = { Stop-Explorer } }
-
-    # --- Performance / Power ---
-    [pscustomobject]@{ Group = "Performance / Power"; Id = 28; Label = "Register Power Settings";   Action = { Register-PowerSettings } }
-    [pscustomobject]@{ Group = "Performance / Power"; Id = 29; Label = "Set Performance Settings";  Action = { Set-PerformanceSettings } }
-    [pscustomobject]@{ Group = "Performance / Power"; Id = 30; Label = "Restart Computer";          Action = { Restart-Computer } }
-
-    # --- Security / Passwords ---
-    [pscustomobject]@{ Group = "Security / Passwords"; Id = 31; Label = "Generate New Password";      Action = { New-Password } }
-    [pscustomobject]@{ Group = "Security / Passwords"; Id = 32; Label = "Set Recommended Password Policy"; Action = { Set-RecommendedPasswordPolicy } }
-    [pscustomobject]@{ Group = "Security / Passwords"; Id = 33; Label = "Set Default Password Policy";    Action = { Set-DefaultPasswordPolicy } }
-
-    # --- Automation ---
-    [pscustomobject]@{ Group = "Automation"; Id = "*"; Label = "Start New Computer Setup (Automated)"; Action = { Start-NewComputerSetup } }
-)
-
 while ($menuLoop) {
+Write-Host "`n`n========================================" -ForegroundColor Cyan
+Write-Host "         SETUP SCRIPT MAIN MENU         " -ForegroundColor Cyan
+Write-Host "========================================`n" -ForegroundColor Cyan
 
-    Write-Host ""
-    Write-Host "========================================" -ForegroundColor Cyan
-    Write-Host "         SETUP SCRIPT MAIN MENU         " -ForegroundColor Cyan
-    Write-Host "========================================" -ForegroundColor Cyan
-    Write-Host ""
+Write-Host "[Automation]" -ForegroundColor Yellow
+Write-Host "[*] Start New Computer Setup (Automated)" -ForegroundColor Green
 
-    # Get distinct groups in order
-    foreach ($group in $menuItems.Group | Sort-Object -Unique) {
-        Write-Host ""
-        Write-Host "[$group]" -ForegroundColor Yellow
+Write-Host "`n[Core Setup]" -ForegroundColor Yellow
+Write-Host "  [ 1] Update All Packages"
+Write-Host "  [ 2] Rename PC"
+Write-Host "  [ 3] Set TimeZone to UK"
+Write-Host "  [ 4] Enable Remote Desktop"
+Write-Host "  [ 5] Remove Bloatware"
+Write-Host "  [ 6] Install Programs"
+Write-Host "  [ 7] Enable .NET Framework 3.5"
+Write-Host "  [ 8] Start Windows Update (Auto)"
+Write-Host "  [ 9] Start Windows Update (Manual)"
+Write-Host "  [10] Join Domain"
 
-        # Get the longest label for padding
-        $groupItems = $menuItems | Where-Object { $_.Group -eq $group }
+Write-Host "`n[Office / Apps]" -ForegroundColor Yellow
+Write-Host "  [11] Install Office 32-bit"
+Write-Host "  [12] Install Office 64-bit"
+Write-Host "  [13] Uninstall All Office Products"
+Write-Host "  [14] Install Splashtop SOS"
+Write-Host "  [15] Remove HP Wolf Security"
 
-        foreach ($item in $groupItems) {
-            if ($item.Id -eq "*") {
-                Write-Host ("  [*] {0}" -f $item.Label) -ForegroundColor Green
-            } else {
-                # Pad the ID to 2 characters for alignment (e.g. ' 1', '10')
-                $id = "{0,2}" -f $item.Id
-                Write-Host ("  [{0}] {1}" -f $id, $item.Label)
-            }
-        }
-    }
+Write-Host "`n[Winget / App Installer]" -ForegroundColor Yellow
+Write-Host "  [16] Install Winget Source"
+Write-Host "  [17] Install Winget from GitHub"
+Write-Host "  [18] Upgrade Winget"
+Write-Host "  [19] Install Winget Manual"
+Write-Host "  [20] Remove Corrupted App Installer"
 
-    Write-Host ""
-    Write-Host "  [ 0] Exit" -ForegroundColor Red
-    Write-Host ""
+Write-Host "`n[UI / UX Tweaks]" -ForegroundColor Yellow
+Write-Host "  [21] Disable Widgets"
+Write-Host "  [22] Disable Task View"
+Write-Host "  [23] Enable Autoplay"
+Write-Host "  [24] Disable Autoplay"
+Write-Host "  [25] Disable Edge Startup"
+Write-Host "  [26] Disable Chrome Startup"
+Write-Host "  [27] Stop Explorer"
+
+Write-Host "`n[Performance / Power]" -ForegroundColor Yellow
+Write-Host "  [28] Register Power Settings"
+Write-Host "  [29] Set Performance Settings"
+Write-Host "  [30] Restart Computer"
+
+Write-Host "`n[Security / Passwords]" -ForegroundColor Yellow
+Write-Host "  [31] Generate New Password"
+Write-Host "  [32] Set Recommended Password Policy"
+Write-Host "  [33] Set Default Password Policy"
+
+Write-Host "`n  [ 0] Exit" -ForegroundColor Red
 
     $choice = Read-Host "Enter your selection"
 
-    if ($choice -eq "0") {
-        Write-Host "`nExiting script." -ForegroundColor Yellow
-        $menuLoop = $false
-        break
-    }
-
-    # Find the selected menu item (supports numeric ID or *)
-    $selected = $menuItems | Where-Object { $_.Id -eq $choice }
-
-    if ($null -ne $selected) {
-        try {
-            & $selected.Action
-        }
-        catch {
-            Write-Host "An error occurred while running [$($selected.Label)]: $_" -ForegroundColor Red
-        }
-    }
-    else {
-        Write-Host "Invalid selection. Please try again." -ForegroundColor Red
+    switch ($choice) {
+        "*"  { Start-NewComputerSetup }
+        "1"  { Update-AllPackages }
+        "2"  { Rename-PC }
+        "3"  { Set-TimeZoneUK }
+        "4"  { Enable-RemoteDesktop }
+        "5"  { Remove-Bloatware }
+        "6"  { Install-Programs }
+        "7"  { Enable-DotNet3Point5 }
+        "8"  { Start-WindowsUpdate }
+        "9"  { Start-WindowsUpdateManual }
+        "10" { Join-Domain }
+        "11" { Install-Office64 }
+        "12" { Install-Office32 }
+        "13" { Remove-AllOffice}
+        "14" { Install-SplashtopSOS }
+        "15" { remove-HPWolfSecurity }
+        "16" { Install-WingetSource }
+        "17" { Install-WingetGitHub }
+        "18" { Install-WingetUpgrade }
+        "19" { Install-WingetManual }
+        "20" { Remove-CorruptedAppInstaller }
+        "21" { Disable-Widgets }
+        "22" { Disable-TaskView }
+        "23" { Enable-Autoplay }
+        "24" { Disable-Autoplay }
+        "25" { Disable-EdgeStartUp }
+        "26" { Disable-ChromeStartUp }
+        "27" { Stop-Explorer }
+        "28" { Register-PowerSettings }
+        "29" { Set-PerformanceSettings }
+        "30" { Restart-LocalComputer }
+        "31" { New-Password }
+        "32" { Set-RecommendedPasswordPolicy }
+        "33" { Set-DefaultPasswordPolicy }
+        "0"  { $menuLoop = $false; Write-Host "`nExiting script." -ForegroundColor Yellow }
+        default { Write-Host "Invalid selection. Please try again." -ForegroundColor Red }
     }
 }
