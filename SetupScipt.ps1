@@ -909,7 +909,7 @@ function Restart-LocalComputer {
 
 # ---------------- EXECUTION ---------------- ##
 
-
+clear-host
 $menuLoop = $true
 
 while ($menuLoop) {
@@ -1008,3 +1008,4 @@ Write-Host "`n  [ 0] Exit" -ForegroundColor Red
         default { Write-Host "Invalid selection. Please try again." -ForegroundColor Red }
     }
 }
+[Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()
