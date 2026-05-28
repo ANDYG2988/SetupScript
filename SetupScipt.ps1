@@ -981,8 +981,8 @@ Write-Host "`n  [ 0] Exit" -ForegroundColor Red
         "8"  { Start-WindowsUpdate }
         "9"  { Start-WindowsUpdateManual }
         "10" { Join-Domain }
-        "11" { Install-Office64 }
-        "12" { Install-Office32 }
+        "11" { Install-Office32 }
+        "12" { Install-Office64 }
         "13" { Remove-AllOffice}
         "14" { Install-SplashtopSOS }
         "15" { remove-HPWolfSecurity }
