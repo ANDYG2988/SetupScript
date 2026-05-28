@@ -793,7 +793,7 @@ function Disable-ChromeStartUp {
 
     New-Item -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Force | Out-Null
     #Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "BrowserSignin" -Value 0 -Type DWord
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "SyncDisabled" -Value 1 -Type DWord
+    #Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "SyncDisabled" -Value 0 -Type DWord
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Google\Chrome" -Name "DefaultBrowserSettingEnabled" -Value 0 -Type DWord
 }
 
