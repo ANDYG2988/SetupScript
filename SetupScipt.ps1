@@ -233,10 +233,10 @@ function Remove-HPWolfSecurity {
     Write-Host "Checking if HP Wolf Security is installed..." -ForegroundColor Yellow
     $hpWolfInstalled = winget list --id "HP.HPWolfSecurity" --accept-source-agreements 2>&1 | Select-String "HP Wolf Security"
 
-    if (-not $hpWolfInstalled) {
-        Write-Host "HP Wolf Security is not installed. Skipping removal." -ForegroundColor Yellow
-        return
-    }
+    #if (-not $hpWolfInstalled) {
+    #    Write-Host "HP Wolf Security is not installed. Skipping removal." -ForegroundColor Yellow
+    #    return
+    #}
 
     try {
         Stop-Service -Name "HpWolfSecurityService" -Force -ErrorAction Stop
