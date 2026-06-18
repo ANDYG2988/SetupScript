@@ -223,7 +223,8 @@ function Install-SplashtopSOS {
     if (-not (Test-Path $destinationPath)) {
         Write-Host "`nDownloading SplashtopSOS.exe to Desktop..." -ForegroundColor Yellow
         try {
-            Start-BitsTransfer -Source "https://github.com/agukbiz2988/SetupScript/raw/main/SplashtopSOS.exe" -Destination $destinationPath
+            #Start-BitsTransfer -Source "https://github.com/agukbiz2988/SetupScript/raw/main/SplashtopSOS.exe" -Destination $destinationPath
+            Start-BitsTransfer -Source "https://github.com/ANDYG2988/SetupScript/raw/refs/heads/main/SplashtopSOS.exe" -Destination $destinationPath
             Write-Host "`nSplashtopSOS.exe downloaded successfully." -ForegroundColor Green
         }
         catch {
