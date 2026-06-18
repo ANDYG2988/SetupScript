@@ -54,9 +54,15 @@ function Set-TimeZoneUK {
 
 function Enable-RemoteDesktop {
     Write-Host "Enabling Remote Desktop..." -ForegroundColor Yellow
-    Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
-    Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
-    Write-Host "Remote Desktop enabled" -ForegroundColor Green
+    try {
+        Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
+        Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+        Write-Host "Remote Desktop enabled" -ForegroundColor Green
+    }
+    catch {
+        Write-Host "Failed to enable Remote Desktop this could be due to insufficient privileges or Windows version incompatibility" -ForegroundColor Red
+    }
+    
 }
 
 function Install-Office {
@@ -231,7 +237,7 @@ function Install-SplashtopSOS {
 
 function Remove-HPWolfSecurity {
     Write-Host "Checking if HP Wolf Security is installed..." -ForegroundColor Yellow
-    $hpWolfInstalled = winget list --id "HP.HPWolfSecurity" --accept-source-agreements 2>&1 | Select-String "HP Wolf Security"
+    #$hpWolfInstalled = winget list --id "HP.HPWolfSecurity" --accept-source-agreements 2>&1 | Select-String "HP Wolf Security"
 
     #if (-not $hpWolfInstalled) {
     #    Write-Host "HP Wolf Security is not installed. Skipping removal." -ForegroundColor Yellow
