@@ -810,21 +810,42 @@ function Start-NewComputerSetup {
     Write-Host "   STARTING NEW COMPUTER SETUP" -ForegroundColor Cyan
     Write-Host "========================================`n" -ForegroundColor Cyan
 
-    $setupChoice = Read-Host "Do you want to select different options before running this script (Y/N)"
-    while ($setupChoice -notmatch '^[YNyn]$') {
-        Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red
+    
+    # $setupChoice = Read-Host "Do you want to select different options before running this script (Y/N)"
+    # while ($setupChoice -notmatch '^[YNyn]$') {
+    #     Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red
+    # }
+
+    $choiceValid = $true
+    while ($choiceValid) {
+        $setupChoice = Read-Host "Do you want to select different options before running this script (Y/N)"
+        if ($setupChoice -eq "Y" -or $setupChoice -eq "y" ) {
+
+            $choiceValid = $false
+            $dotNetChoice = Read-Host "Do you want to enable .NET Framework 3.5? (Y/N)"
+            while ($dotNetChoice -notmatch '^[YNyn]$') {Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red}
+            
+            $passwordPolicyChoice = Read-Host "Do you want to set Recommended Password Policy? (Y/N)"
+            while ($passwordPolicyChoice -notmatch '^[YNyn]$') {Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red}
+
+        } elseif ($setupChoice -eq "N" -or $setupChoice -eq "n"){
+            $choiceValid = $false
+            Write-Host "All functions will run with default options..."
+        } else {
+            Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red
+        }
     }
 
-    if ($setupChoice -eq "Y" -or $setupChoice -eq "y") {
-        $dotNetChoice = Read-Host "Do you want to enable .NET Framework 3.5? (Y/N)"
-        while ($dotNetChoice -notmatch '^[YNyn]$') {Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red}
+    # if ($setupChoice -eq "Y" -or $setupChoice -eq "y") {
+    #     $dotNetChoice = Read-Host "Do you want to enable .NET Framework 3.5? (Y/N)"
+    #     while ($dotNetChoice -notmatch '^[YNyn]$') {Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red}
         
-        $passwordPolicyChoice = Read-Host "Do you want to set Recommended Password Policy? (Y/N)"
-        while ($passwordPolicyChoice -notmatch '^[YNyn]$') {Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red}
+    #     $passwordPolicyChoice = Read-Host "Do you want to set Recommended Password Policy? (Y/N)"
+    #     while ($passwordPolicyChoice -notmatch '^[YNyn]$') {Write-Host "Invalid input. Please enter Y or N." -ForegroundColor Red}
 
-    } else {
-        Write-Host "All functions will run with default options..."
-    }
+    # } else {
+    #     Write-Host "All functions will run with default options..."
+    # }
 
         Write-Host "[1/18] Registering Power Settings..." -ForegroundColor Yellow
         Register-PowerSettings
