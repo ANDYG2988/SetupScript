@@ -160,15 +160,10 @@ function Remove-Bloatware {
         "Microsoft.WindowsMaps",
         "Microsoft.MicrosoftOfficeHub",
         "Microsoft.WindowsFeedbackHub",
-        "ARP\Machine\X64\McAfee.WPS",
         "MSIX\McAfeeWPSSparsePackage_16.131.0.22_neutral__0j6k21vdgrmfw",
+        "ARP\Machine\X64\McAfee.WPS",
     	"9N7WSZGCK7M5"
     )
-
-    foreach ($app in $bloatware) {
-        Write-Host "`nRemoving $app..." -ForegroundColor Yellow
-        winget uninstall --id $app --accept-source-agreements -h --force SilentlyContinue
-    }
 
     $apps =@(
  		"McAfee® Personal Security",
@@ -196,6 +191,11 @@ function Remove-Bloatware {
  		Write-Host "`nUninstalling $program..." -ForegroundColor Yellow
 		winget uninstall --name $program --accept-source-agreements -h --force
 	}
+
+    foreach ($app in $bloatware) {
+        Write-Host "`nRemoving $app..." -ForegroundColor Yellow
+        winget uninstall --id $app --accept-source-agreements -h --force SilentlyContinue
+    }
     
     Write-Host "`nBloatware removal completed.`n" -ForegroundColor Green
 }
