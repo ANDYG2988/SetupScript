@@ -161,6 +161,7 @@ function Remove-Bloatware {
         "Microsoft.MicrosoftOfficeHub",
         "Microsoft.WindowsFeedbackHub",
         "ARP\Machine\X64\McAfee.WPS",
+        "MSIX\McAfeeWPSSparsePackage_16.131.0.22_neutral__0j6k21vdgrmfw",
     	"9N7WSZGCK7M5"
     )
 
@@ -200,12 +201,12 @@ function Remove-Bloatware {
 }
 
 function Install-Programs {
-    Write-Output "`nInstallation of Standard Programs will begin" -ForegroundColor Yellow
+    Write-Host "`nInstallation of Standard Programs will begin" -ForegroundColor Yellow
 
     $programs = @("google.chrome", "Adobe.Acrobat.Reader.64-bit")
     
     foreach ($program in $programs) {
-        Write-Output "Installing $program..."
+        Write-Host "Installing $program..." -ForegroundColor Yellow
         try {
             winget install $program -h --accept-source-agreements
         }
