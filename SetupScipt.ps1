@@ -5,6 +5,8 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     exit
 }
 
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+
 # ---------------- FUNCTIONS ---------------- #
 function Update-AllPackages {
     Write-Host "Updating all installed packages..." -ForegroundColor Yellow
@@ -196,6 +198,13 @@ function Remove-Bloatware {
         Write-Host "`nRemoving $app..." -ForegroundColor Yellow
         winget uninstall --id $app --accept-source-agreements -h --force SilentlyContinue
     }
+
+    try{
+        winget uninstall "ARP\Machine\X64\McAfee.WPS"
+    } catch {
+        Write-Host "Failed to remove McAfee"
+    }
+    
     
     Write-Host "`nBloatware removal completed.`n" -ForegroundColor Green
 }
